@@ -3,8 +3,8 @@
 #   using the stack impemanted in Mystack
 import MyStack as mst
 
-left_brackets = ['(', '[', '{']
-right_brackets = [')', ']', '}']
+left_brackets = '([{'
+right_brackets = ')]}'
 
 def check(_string):
     """
