@@ -54,8 +54,55 @@ class myStack:
         """ Stack based on lists is never full added only because of the Instructions of the pdf"""
         return False
 
+
+
+
+"""
+    The function that checks for balanced expressions
+"""
+def check(_string):
+     # opening delimeters (must have same order in left and right brackets)
+    left_brackets = '([{'
+     # closing delimeters (must have same order in left and right brackets)
+    right_brackets = ')]}'
+
+    """
+        A function that checks if an expression(string) that contains '(),{},[]'
+        is well balenced and prints an answer based on that.
+    """
+    checkStack = myStack()
+    # loop the whole string if string is empty we consider it as balanced
+    for ch in _string:
+        # push until you find a right bracket and only push brackets
+        if ch in left_brackets:
+            checkStack.push(ch)
+        elif ch in right_brackets:
+            # if stack is empty string is left-unbalanced
+            if checkStack.isEmpty():
+                print'expression : ', _string,'left-unbalanced none opening delimeter found'
+                return False
+            # check if it is the same type of delimeter
+            if right_brackets.index(ch)!= left_brackets.index(checkStack.pop()):
+                print'expression : ', _string,'has a mismatched delimeter '
+                return False
+    # if the stack is empty string then is balanced else found no delimeter
+    if checkStack.isEmpty():
+        print 'expression : ', _string,' is balanced'
+        return True
+    else:
+        print 'expression : ', _string,'found no right delimeter to match'
+        return False
+
+
+
+
+
+
 """ run as main for testing """
 if __name__=='__main__':
+    print "*"*60
+    print "Test for the stack"
+    print "*"*60
     adtStack = myStack()
     print 'length is :',len(adtStack)
     print'pushing 1'
@@ -72,5 +119,20 @@ if __name__=='__main__':
         print'pop : ',adtStack.pop()
     print'stack is full :', adtStack.isFull()
     print'stack is empty : ', adtStack.isEmpty()
-    print'pop : '
-    adtStack.pop()
+    #print'pop : '
+    #adtStack.pop()
+    print "*"*60
+    print "Test for the balanced expressions"
+    print "*"*60
+    check('')
+    check('()')
+    check('({[]})')
+    check(')')
+    check('(')
+    check('()[]')
+    check('([)')
+    check('(])')
+    check('(]')
+    check('((((()')
+    check("{a+x*[(a/x-3)-4]+2x+4}")
+    check("{a+x*(a/x-3)-4]+2x+4}")

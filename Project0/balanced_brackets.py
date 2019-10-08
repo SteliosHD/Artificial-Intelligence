@@ -1,7 +1,7 @@
 #!python
 # Checks if a string containg (),{},[] is balanced
 #   using the stack impemanted in Mystack
-import MyStack as mst
+import stack as mst
 
  # opening delimeters (must have same order in left and right brackets)
 left_brackets = '([{'
