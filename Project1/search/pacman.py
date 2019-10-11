@@ -4,7 +4,7 @@
 # educational purposes provided that (1) you do not distribute or publish
 # solutions, (2) you retain this notice, and (3) you provide clear
 # attribution to UC Berkeley, including a link to http://ai.berkeley.edu.
-# 
+#
 # Attribution Information: The Pacman AI projects were developed at UC Berkeley.
 # The core projects and autograders were primarily created by John DeNero
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
@@ -626,6 +626,7 @@ def replayGame( layout, actions, display ):
     display.finish()
 
 def runGames( layout, pacman, ghosts, display, numGames, record, numTraining = 0, catchExceptions=False, timeout=30 ):
+    #print "layout, pacman, ghosts, display, numGames, record,numTraining = 0, catchExceptions=False, timeout=30",layout, pacman, ghosts, display, numGames, record,numTraining , catchExceptions, timeout
     import __main__
     __main__.__dict__['_display'] = display
 

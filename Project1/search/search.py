@@ -4,7 +4,7 @@
 # educational purposes provided that (1) you do not distribute or publish
 # solutions, (2) you retain this notice, and (3) you provide clear
 # attribution to UC Berkeley, including a link to http://ai.berkeley.edu.
-# 
+#
 # Attribution Information: The Pacman AI projects were developed at UC Berkeley.
 # The core projects and autograders were primarily created by John DeNero
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
@@ -61,6 +61,96 @@ class SearchProblem:
         """
         util.raiseNotDefined()
 
+class Fringe():
+    """
+        Custom fringe queue that uses the data structures in util to make
+        a universal structure for fringe
+    """
+    def __init__(self,strategy):
+        if strategy == 'dfs':
+            self.fringe = util.Stack()
+        elif strategy == 'bfs':
+            self.fringe = util.Queue()
+        elif strategy == 'ucs':
+            fringe = util.PriorityQueue()
+        elif strategy == 'astar':
+            pass
+        elif strategy == 'nh':
+            pass
+
+    def QueuingFn(self, item,):
+        if isinstance(self.fringe, util.PriorityQueue):
+                self.frige.push(item,item[2])
+        elif isinstance(self.fringe,util.Stack):
+                self.fringe.push(item)
+        elif isinstance(self.fringe,util.Queue):
+                self.fringe.push(item)
+
+    def RemoveFront(self):
+        return self.fringe.pop()
+
+    def Empty(self):
+        return self.fringe.isEmpty()
+
+    def Expand(self, problem, state):
+        if isinstance(self.fringe,util.Stack):
+            sucs = problem.getSuccessors(state)
+            sucs.reverse()
+            return sucs
+        else:
+            return problem.getSuccessors(state)
+        # # # print sucs is None
+        # # print sucs.reverse()
+        # # print sucs
+        # # for ele in sucs:
+        # #     print ele
+        # # print isinstance(self.fringe, util.PriorityQueue)
+        # # print type(sucs)
+        # if isinstance(self.fringe, util.PriorityQueue):
+        #     for ele in sucs:
+        #         self.frige.push(ele,ele[2])
+        # elif isinstance(self.fringe,util.Stack):
+        #     sucs.reverse()
+        #     for ele in sucs:
+        #         self.fringe.push(ele)
+        # elif isinstance(self.fringe,util.Queue):
+        #     for ele in sucs:
+        #         self.fringe.push(ele)
+
+
+
+def graphSearch(problem,strategy):
+    sol = []
+    closed = []
+    fringe = Fringe(strategy)
+    state= problem.getStartState()
+    closed.append(state)
+    for child in fringe.Expand(problem, state):
+        fringe.QueuingFn(child)
+    while fringe:
+        node = fringe.RemoveFront()
+        state = node[0]
+        if state in closed:
+            sol.pop()
+        print "node is ",node
+        print "state is ",state
+        sol.append(node[1])
+        if problem.isGoalState(state):
+            print sol
+            return sol
+        print 'state not in ' ,state not in closed
+        if state not in closed  :
+            closed.append(state)
+            print "print sucs", problem.getSuccessors(state)
+            print sol
+            for child in fringe.Expand(problem, state):
+                if not child[2] in closed:
+                    fringe.QueuingFn(child)
+
+        else:
+            sol.pop()
+
+    return None
 
 def tinyMazeSearch(problem):
     """
@@ -81,13 +171,19 @@ def depthFirstSearch(problem):
 
     To get started, you might want to try some of these simple commands to
     understand the search problem that is being passed in:
-
-    print "Start:", problem.getStartState()
-    print "Is the start a goal?", problem.isGoalState(problem.getStartState())
-    print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
+    # print "Problem : ", problem
+    # print "Start:", problem.getStartState()
+    # print "Is the start a goal?", problem.isGoalState(problem.getStartState())
+    # print "the goal is", problem.goal
+    # print "Start's successors:", problem.getSuccessors(problem.getStartState())
+    # l = [(i,j) for i in range(1,5) for j in range(1,5)]
+    # for k in l:
+    #     print "node's successors:", problem.getSuccessors(k)[0][0]
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    # util.raiseNotDefined()
+    print problem.walls[5][5]
+    return graphSearch(problem, 'dfs')
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
