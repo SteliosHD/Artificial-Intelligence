@@ -117,77 +117,60 @@ class Fringe():
         #     for ele in sucs:
         #         self.fringe.push(ele)
 
-class Node:
 
-    def __init__(self, arg, st):
-        self.node = arg[0]
-        self.parent = st
-        self.action = arg[1]
-        self.cost = arg[2]
+# class Tree():
+#
+#
+#
+#
+#
+#
+#       class Node:
+#
+#         def __init__(self, arg, st):
+#             self.node = arg[0]
+#             self.parent = st
+#             self.action = arg[1]
+#             self.cost = arg[2]
+#
+#         def getNode(self):
+#             return self.node
+#
+#         def getParent(self):
+#             return self.parent
+#
+#         def getAction(self):
+#             return self.action
+#
+#         def getCost(self):
+#             return self.cost
 
-    def getNode(self):
-        return self.node
-
-    def getParent(self):
-        return self.parent
-
-    def getAction(self):
-        return self.action
-
-    def getCost(self):
-        return self.cost
 
 def graphSearch(problem,strategy):
-    tree = {}
+    import Tree
+    
     closed = []
     fringe = Fringe(strategy)
     state = problem.getStartState()
-    tree.update({state:Node([state,None,None],None)})
+    tree = Tree.Tree(state)
     closed.append(state)
     for child in fringe.Expand(problem, state):
+        tree.addNode(child,state)
         fringe.QueuingFn(child)
-        tree.update({child[0]:Node(child,state)})
     while fringe:
         node = fringe.RemoveFront()
         state = node[0]
-        # if state in closed:
-        #     sol.pop()
-        # print "node is ",node
-        # print "state is ",state
-
         if problem.isGoalState(state):
-            # print sol
-            sol = []
-            while True:
-                # print "state is : ",state
-                curnode = tree[state]
-                # print "curnode is ",curnode
-                state = curnode.getParent()
-                # print "state now is : ", state
-                if state:
-                    sol.append(curnode.getAction())
-                else:
-                    break
-
-            sol.reverse()
-            # print sol
-            # print len(sol)
+            node = tree.getNode(state)
+            print node
+            sol = node.getPathAction()
             return sol
-        # print 'state not in ' ,state not in closed
         if state not in closed  :
             closed.append(state)
-            # sucs = []
-            # print "print sucs", problem.getSuccessors(state)
-            # print sol
             for child in fringe.Expand(problem, state):
                 if not child[0] in closed:
-                    # sucs.append(child)
                     fringe.QueuingFn(child)
-                    tree.update({child[0]:Node(child,state)})
-            # print "closed is : ",closed
-            # print "sucs list is : ",sucs
-            # if not sucs :
-            #     sol.pop()
+                    tree.addNode(child,state)
     return None
 
 def tinyMazeSearch(problem):
