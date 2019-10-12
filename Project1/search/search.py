@@ -72,7 +72,7 @@ class Fringe():
         elif strategy == 'bfs':
             self.fringe = util.Queue()
         elif strategy == 'ucs':
-            fringe = util.PriorityQueue()
+            self.fringe = util.PriorityQueue()
         elif strategy == 'astar':
             pass
         elif strategy == 'nh':
@@ -80,7 +80,7 @@ class Fringe():
 
     def QueuingFn(self, item,):
         if isinstance(self.fringe, util.PriorityQueue):
-                self.frige.push(item,item[2])
+                self.fringe.push(item,item[2])
         elif isinstance(self.fringe,util.Stack):
                 self.fringe.push(item)
         elif isinstance(self.fringe,util.Queue):
@@ -117,39 +117,77 @@ class Fringe():
         #     for ele in sucs:
         #         self.fringe.push(ele)
 
+class Node:
 
+    def __init__(self, arg, st):
+        self.node = arg[0]
+        self.parent = st
+        self.action = arg[1]
+        self.cost = arg[2]
+
+    def getNode(self):
+        return self.node
+
+    def getParent(self):
+        return self.parent
+
+    def getAction(self):
+        return self.action
+
+    def getCost(self):
+        return self.cost
 
 def graphSearch(problem,strategy):
-    sol = []
+    tree = {}
     closed = []
     fringe = Fringe(strategy)
-    state= problem.getStartState()
+    state = problem.getStartState()
+    tree.update({state:Node([state,None,None],None)})
     closed.append(state)
     for child in fringe.Expand(problem, state):
         fringe.QueuingFn(child)
+        tree.update({child[0]:Node(child,state)})
     while fringe:
         node = fringe.RemoveFront()
         state = node[0]
-        if state in closed:
-            sol.pop()
-        print "node is ",node
-        print "state is ",state
-        sol.append(node[1])
+        # if state in closed:
+        #     sol.pop()
+        # print "node is ",node
+        # print "state is ",state
+
         if problem.isGoalState(state):
-            print sol
+            # print sol
+            sol = []
+            while True:
+                # print "state is : ",state
+                curnode = tree[state]
+                # print "curnode is ",curnode
+                state = curnode.getParent()
+                # print "state now is : ", state
+                if state:
+                    sol.append(curnode.getAction())
+                else:
+                    break
+
+            sol.reverse()
+            # print sol
+            # print len(sol)
             return sol
-        print 'state not in ' ,state not in closed
+        # print 'state not in ' ,state not in closed
         if state not in closed  :
             closed.append(state)
-            print "print sucs", problem.getSuccessors(state)
-            print sol
+            # sucs = []
+            # print "print sucs", problem.getSuccessors(state)
+            # print sol
             for child in fringe.Expand(problem, state):
-                if not child[2] in closed:
+                if not child[0] in closed:
+                    # sucs.append(child)
                     fringe.QueuingFn(child)
-
-        else:
-            sol.pop()
-
+                    tree.update({child[0]:Node(child,state)})
+            # print "closed is : ",closed
+            # print "sucs list is : ",sucs
+            # if not sucs :
+            #     sol.pop()
     return None
 
 def tinyMazeSearch(problem):
@@ -182,18 +220,23 @@ def depthFirstSearch(problem):
     #     print "node's successors:", problem.getSuccessors(k)[0][0]
     "*** YOUR CODE HERE ***"
     # util.raiseNotDefined()
-    print problem.walls[5][5]
+    # print problem.walls[5][5]
+    # print problem.getSuccessors(problem.getStartState())
     return graphSearch(problem, 'dfs')
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    # util.raiseNotDefined()
+    # print problem.getSuccessors(problem.getStartState())
+    return graphSearch(problem, 'bfs')
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    # util.raiseNotDefined()
+    # print problem.getSuccessors(problem.getStartState())
+    return graphSearch(problem, 'ucs')
 
 def nullHeuristic(state, problem=None):
     """
