@@ -1,16 +1,16 @@
 
 
 class Tree:
-        def __init__(self,root):
-            self.root = root
-            self.node = Node(self.root)
-            self.tree = {root:self.node}
+    def __init__(self,root):
+        self.root = root
+        self.node = Node(self.root)
+        self.tree = {root:self.node}
 
-        def addNode(self, args, parent):
-            self.tree.update({args[0]:Node(args[0], args[1], args[2], parent)})
+    def addNode(self, args, parent):
+        self.tree.update({args[0]:Node(args[0], args[1], args[2], parent)})
 
-        def getNode(self, state ):
-            return self.tree[state]
+    def getNode(self, state ):
+        return self.tree[state]
 
 
 class Node():
@@ -31,27 +31,30 @@ class Node():
         return self.cost
 
     def getPathCost(self):
-        PathCost = self.getCost()
-        node = self.getParent()
-        while node.getAction():
-            PathCost += node.getCost()
-            node = node.getParent()
+        PathCost = self.cost
+        node = self.parent
+        while True:
+            if not node.parent: break
+            PathCost += node.cost
+            node = node.parent
         return PathCost
 
     def getDepth(self):
         depth = 1
-        node = self.getParent()
-        while node.getAction():
+        node = self.parent
+        while True:
+            if not node.parent: break
             depth += 1
-            node = node.getParent()
+            node = node.parent
         return depth
 
     def getPathAction(self):
         path = [self.action]
-        node = self.getParent()
-        while node:
-            path.append(node.getAction())
-            node = node.getParent()
+        node = self.parent
+        while True:
+            if not node.parent: break
+            path.append(node.action)
+            node = node.parent
         path.reverse()
         return path
 

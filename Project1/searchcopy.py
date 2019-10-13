@@ -64,11 +64,9 @@ class SearchProblem:
 class Fringe():
     """
         Custom fringe queue that uses the data structures in util to make
-        a universal structure for fringe.
-        Strategy that supports : dfs,bfs,ucs
+        a universal structure for fringe
     """
     def __init__(self,strategy):
-        """ Create the fringe according the given strategy"""
         if strategy == 'dfs':
             self.fringe = util.Stack()
         elif strategy == 'bfs':
@@ -81,7 +79,6 @@ class Fringe():
             pass
 
     def QueuingFn(self, item,):
-        """ Use the appropriate push method if PriorityQueue is used cost is the PathCost"""
         if isinstance(self.fringe, util.PriorityQueue):
                 self.fringe.push(item,item.getPathCost())
         elif isinstance(self.fringe,util.Stack):
@@ -90,149 +87,89 @@ class Fringe():
                 self.fringe.push(item)
 
     def RemoveFront(self):
-        """ Universal remove (pop)"""
         return self.fringe.pop()
 
     def Empty(self):
         return self.fringe.isEmpty()
 
     def Expand(self, problem, state):
-        """ Expand the children of the node get succesors """
         if isinstance(self.fringe,util.Stack):
             sucs = problem.getSuccessors(state)
-            sucs
+            sucs.reverse()
             return sucs
         else:
             return problem.getSuccessors(state)
-
-    def Get(self):
-        """ Gets a list of the fringe in it's current state"""
-        if isinstance(self.fringe,util.PriorityQueue):
-            return self.fringe.heap
-        else:
-            return self.fringe.list
-
-class Tree:
-    """
-        This is a simple tree structure implemented with a dictionary
-        Each element has a distinct key-name (node name or state ) and the
-        value of that key is a node object from the node class
-        Methods: addNode,getNode
-    """
-    def __init__(self,root):
-        """Create the root of the tree"""
-        self.root = root
-        self.node = Node(self.root,None, None, None)
-        self.tree = {root:self.node}
-
-    def addNode(self, args, parent):
-        """
-            Takes a list as a first argument (not to be confused with *args)
-            with the following form [<state>, <action>, <cost>] then creates
-            a node with this list. The second argument is the parent node.
-        """
-        self.tree.update({args[0]:Node(args[0], args[1], args[2], parent)})
-
-    def getNode(self, state ):
-        """ Returns the node with key = state from the tree"""
-        return self.tree[state]
+        # # # print sucs is None
+        # # print sucs.reverse()
+        # # print sucs
+        # # for ele in sucs:
+        # #     print ele
+        # # print isinstance(self.fringe, util.PriorityQueue)
+        # # print type(sucs)
+        # if isinstance(self.fringe, util.PriorityQueue):
+        #     for ele in sucs:
+        #         self.frige.push(ele,ele[2])
+        # elif isinstance(self.fringe,util.Stack):
+        #     sucs.reverse()
+        #     for ele in sucs:
+        #         self.fringe.push(ele)
+        # elif isinstance(self.fringe,util.Queue):
+        #     for ele in sucs:
+        #         self.fringe.push(ele)
 
 
-class Node:
-    """
-        Node class that creates nodes to be stored in the Tree. Every node has
-        a state(e.g name) an action (e.g. 'West') a cost(e.g. 1)(the cost from
-        the parent node till this node) and a parent Node.
-        Methods: getState, getAction, getCost,getParent. getPathCost, getDepth, getPathAction
-    """
-
-    def __init__(self, state, action, cost , parent):
-        """Creates a node with a state, an action, a cost, an a parent Node"""
-        self.state  = state
-        self.action = action
-        self.cost   = cost
-        self.parent = parent
-
-    def getState(self):
-        return self.state
-
-    def getAction(self):
-        return self.action
-
-    def getCost(self):
-        return self.cost
-
-    def getParent(self):
-        return self.parent
-
-    def getPathCost(self):
-        """ Gets the path cost from the root till the Node"""
-        PathCost = self.cost
-        node = self.parent
-        while True:
-            if not node.parent: break
-            PathCost += node.cost
-            node = node.parent
-        return PathCost
-
-    def getDepth(self):
-        """ Gets the depth of the Node"""
-        depth = 1
-        node = self.parent
-        while True:
-            if not node.parent: break
-            depth += 1
-            node = node.parent
-        return depth
-
-    def getPathAction(self):
-        """ Gets the path(actions to get to the Node) from the root"""
-        path = [self.action]
-        node = self.parent
-        while True:
-            if not node.parent: break
-            path.append(node.action)
-            node = node.parent
-        path.reverse()
-        return path
-
+# class Tree():
+#
+#
+#
+#
+#
+#
+#       class Node:
+#
+#         def __init__(self, arg, st):
+#             self.node = arg[0]
+#             self.parent = st
+#             self.action = arg[1]
+#             self.cost = arg[2]
+#
+#         def getNode(self):
+#             return self.node
+#
+#         def getParent(self):
+#             return self.parent
+#
+#         def getAction(self):
+#             return self.action
+#
+#         def getCost(self):
+#             return self.cost
 
 
 def graphSearch(problem,strategy):
-    """
-        Impemantation of graph search using a tree structure with nodes. The
-        input is the problem and a strategy("dfs", "bfs", "ucs"). Depending
-        on the strategy a universal fringe is created using an assisting class
-        called Fringe that impements the appropriate data structure(stack, queue,
-        priority queue).
-    """
+    import Tree
 
     closed = []
-    #initialization phase create tree(root and root children) and fringe.
     fringe = Fringe(strategy)
     state = problem.getStartState()
-    tree = Tree(state)
+    tree = Tree.Tree(state)
     closed.append(state)
     for child in fringe.Expand(problem, tree.getNode(state).getState()):
+        # print child
         tree.addNode(child,tree.getNode(state))
         fringe.QueuingFn(tree.getNode(child[0]))
-    #loop until solution is find or fringe is empty
     while fringe:
         node = fringe.RemoveFront()
         state = node.getState()
-        # if goal state get the path actions
         if problem.isGoalState(state):
             sol = node.getPathAction()
             return sol
-        # check if node is in explored
-        if not state in closed  :
+        if state not in closed  :
             closed.append(state)
             for child in fringe.Expand(problem, tree.getNode(state).getState()):
-                childstate = child[0]
-                fls = fringe.Get()
-                # if child is has not been explored or is not in the fringe addNode in the Fringe
-                if  not childstate in closed or childstate in fls:
-                    tree.addNode(child,node)
+                if not child[0] in closed:
+                    # print child
+                    tree.addNode(child,tree.getNode(state))
                     fringe.QueuingFn(tree.getNode(child[0]))
     return None
 
