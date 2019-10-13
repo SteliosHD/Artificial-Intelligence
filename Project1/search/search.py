@@ -105,7 +105,7 @@ class Fringe():
         else:
             return problem.getSuccessors(state)
 
-    def Get(self):
+    def GetList(self):
         """ Gets a list of the fringe in it's current state"""
         if isinstance(self.fringe,util.PriorityQueue):
             return self.fringe.heap
@@ -125,13 +125,9 @@ class Tree:
         self.node = Node(self.root,None, None, None)
         self.tree = {root:self.node}
 
-    def addNode(self, args, parent):
-        """
-            Takes a list as a first argument (not to be confused with *args)
-            with the following form [<state>, <action>, <cost>] then creates
-            a node with this list. The second argument is the parent node.
-        """
-        self.tree.update({args[0]:Node(args[0], args[1], args[2], parent)})
+    def addNode(self, itemNode):
+        """ Takes a node as an argument and adds it in the tree"""
+        self.tree.update({itemNode.getState():itemNode})
 
     def getNode(self, state ):
         """ Returns the node with key = state from the tree"""
@@ -140,9 +136,9 @@ class Tree:
 
 class Node:
     """
-        Node class that creates nodes to be stored in the Tree. Every node has
-        a state(e.g name) an action (e.g. 'West') a cost(e.g. 1)(the cost from
-        the parent node till this node) and a parent Node.
+        Node class that creates nodes (to be stored in the Tree). Every node has
+        a state(e.g. name) an action (e.g. 'West') a cost(e.g. 1)(the cost from
+        the parent node till this node) and a parent Node(node object).
         Methods: getState, getAction, getCost,getParent. getPathCost, getDepth, getPathAction
     """
 
@@ -207,34 +203,29 @@ def graphSearch(problem,strategy):
         priority queue).
     """
 
-    closed = []
     #initialization phase create tree(root and root children) and fringe.
     fringe = Fringe(strategy)
     state = problem.getStartState()
-    tree = Tree(state)
-    closed.append(state)
-    for child in fringe.Expand(problem, tree.getNode(state).getState()):
-        tree.addNode(child,tree.getNode(state))
-        fringe.QueuingFn(tree.getNode(child[0]))
+    explored = Tree(state)
+    for child in fringe.Expand(problem, explored.getNode(state).getState()):
+        childnode = Node(child[0],child[1],child[2],explored.getNode(state))
+        fringe.QueuingFn(childnode)
     #loop until solution is find or fringe is empty
-    while fringe:
-        node = fringe.RemoveFront()
-        state = node.getState()
+    while True:
+        if not fringe.GetList(): return False
+        currentNode = fringe.RemoveFront()
         # if goal state get the path actions
-        if problem.isGoalState(state):
-            sol = node.getPathAction()
-            return sol
+        if problem.isGoalState(currentNode.getState()):
+            return currentNode.getPathAction()
         # check if node is in explored
-        if not state in closed  :
-            closed.append(state)
-            for child in fringe.Expand(problem, tree.getNode(state).getState()):
-                childstate = child[0]
-                fls = fringe.Get()
+        if not currentNode.getState() in explored.tree.keys()  :
+            explored.addNode(currentNode)
+            for child in fringe.Expand(problem, currentNode.getState()):
+                childnode = Node(child[0],child[1],child[2],currentNode)
                 # if child is has not been explored or is not in the fringe addNode in the Fringe
-                if  not childstate in closed or childstate in fls:
-                    tree.addNode(child,node)
-                    fringe.QueuingFn(tree.getNode(child[0]))
-    return None
+                if  not childnode.getState() in explored.tree.keys() or childnode in fringe.GetList():
+                    fringe.QueuingFn(childnode)
+
 
 def tinyMazeSearch(problem):
     """
