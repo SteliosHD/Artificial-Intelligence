@@ -70,24 +70,25 @@ class Fringe():
     def __init__(self,strategy):
         """ Create the fringe according the given strategy"""
         if strategy == 'dfs':
+            self.structure = 'Stack'
             self.fringe = util.Stack()
         elif strategy == 'bfs':
+            self.structure = 'Queue'
             self.fringe = util.Queue()
         elif strategy == 'ucs':
+            self.structure = 'PriorityQueue'
             self.fringe = util.PriorityQueue()
-        elif strategy == 'astar':
-            pass
-        elif strategy == 'nh':
-            pass
 
-    def QueuingFn(self, item,):
+    def QueuingFn(self, item):
         """ Use the appropriate push method if PriorityQueue is used cost is the PathCost"""
-        if isinstance(self.fringe, util.PriorityQueue):
-                self.fringe.push(item,item.getPathCost())
-        elif isinstance(self.fringe,util.Stack):
-                self.fringe.push(item)
-        elif isinstance(self.fringe,util.Queue):
-                self.fringe.push(item)
+        if self.structure == 'PriorityQueue':
+            self.fringe.push(item,item.getPathCost())
+        elif self.structure == 'Stack': # wasn't nessesary to be distinct but better seperated
+            self.fringe.push(item)
+        elif self.structure == 'Queue': # wasn't nessesary to be distinct but better seperated
+            self.fringe.push(item)
+        elif self.structure == 'PriorityQueueWithFunction': # wasn't nessesary to be distinct but better seperated
+            self.fringe.push(item)
 
     def RemoveFront(self):
         """ Universal remove (pop)"""
@@ -98,19 +99,59 @@ class Fringe():
 
     def Expand(self, problem, state):
         """ Expand the children of the node get succesors """
-        if isinstance(self.fringe,util.Stack):
+        if self.structure == 'Stack':
             sucs = problem.getSuccessors(state)
-            sucs
+            # sucs.reverse() # reverse method returns false but reverses list so not direct return
             return sucs
         else:
             return problem.getSuccessors(state)
 
+
     def GetList(self):
         """ Gets a list of the fringe in it's current state"""
-        if isinstance(self.fringe,util.PriorityQueue):
+        if self.structure == 'PriorityQueue' or self.structure == 'PriorityQueueWithFunction':
             return self.fringe.heap
         else:
             return self.fringe.list
+
+class FringeHeur(Fringe):
+
+    def __init__(self, problem, heuristic, strategy ='astar'):
+        self.fringe = util.PriorityQueueWithFunction(self.priorityFn)
+        self.problem = problem
+        self.heurisic = heuristic
+        self.strategy = strategy
+        self.structure = 'PriorityQueueWithFunction'
+
+    def priorityFn(self,item):
+        return self.heurisic(item.getState(),self.problem) + item.getPathCost()
+
+
+
+#
+# class PriorityQueueFn(util.PriorityQueue):
+#     """
+#     Implements a priority queue with the same push/pop signature of the
+#     Queue and the Stack classes. This is designed for drop-in replacement for
+#     those two classes. The caller has to provide a priority function, which
+#     extracts each item's priority.
+#     """
+#     def  __init__(self, priorityFunction):
+#         "priorityFunction (item) -> priority"
+#         self.priorityFunction = priorityFunction      # store the priority function
+#         util.PriorityQueue.__init__(self)        # super-class initializer
+#
+#     def push(self, item, problem = None):
+#         "Adds an item to the queue with priority from the priority function"
+#         util.PriorityQueue.push(self, item, self.costFunc(item, problem))
+#
+#     def costFunc(self,item, problem):
+#         return item.getPathCost() + self.priorityFunction(item.getState(), problem)
+
+
+
+
+
 
 class Tree:
     """
@@ -194,7 +235,7 @@ class Node:
 
 
 
-def graphSearch(problem,strategy):
+def graphSearch(problem,strategy,priorityFn = None):
     """
         Impemantation of graph search using a tree structure with nodes. The
         input is the problem and a strategy("dfs", "bfs", "ucs"). Depending
@@ -204,7 +245,11 @@ def graphSearch(problem,strategy):
     """
 
     #initialization phase create tree(root and root children) and fringe.
-    fringe = Fringe(strategy)
+    if strategy == 'astar':
+        print priorityFn
+        fringe = FringeHeur(problem,priorityFn,strategy)
+    else:
+        fringe = Fringe(strategy)
     state = problem.getStartState()
     explored = Tree(state)
     for child in fringe.Expand(problem, explored.getNode(state).getState()):
@@ -285,8 +330,9 @@ def nullHeuristic(state, problem=None):
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
-
+    # util.raiseNotDefined()
+    # print "the goal is", problem.goal
+    return graphSearch(problem, 'astar', heuristic)
 
 # Abbreviations
 bfs = breadthFirstSearch
