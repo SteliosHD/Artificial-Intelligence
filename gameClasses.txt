@@ -1,0 +1,37 @@
+Game.py
+
+Classes
+
+Agent(index=0) 
+parents:
+methods: 
+abstacts: getAction(self,state)
+vars self: index
+constants:
+overides:
+
+
+Directions()stores constants
+parents:
+methods:
+abstracts:
+vars self: 
+constants: LEFT,RIGHT,REVERSE(DICTS) NORTH,SOUTH,EAST,WEST,STOP(STRINGS)
+overides:
+
+Configuration(pos,direction)  A Configuration holds the (x,y) coordinate of a character, along with its traveling direction.
+parents:
+methods: getPosition(self),getDirection(self),isInteger(self),generateSuccesor(self,vector)
+abstracts:
+vars self: pos,direction
+constants: dx,dy(vector)
+overides: __eq__,__hash__,__str__ 
+
+Grid(width,height,initialValue=False,bitRepresantation=None) A 2-dimensional array of objects backed by a list of lists.  Data is accessed via grid[x][y] where (x,y) are positions on a Pacman map with x horizontal, y vertical and the origin (0,0) in the bottom left corner. The __str__ method constructs an output that is oriented like a pacman board.
+parents:
+methods:copy(self),deepCopy(self),shallowCopy(self),count(self,item=True),asList(self,key=True),packBits(self),_cellIndexToPosition(self,index),_unpackBits(self,bits),_unpackInt(self,packed,size),reconstituteGrid(bitRep)
+abstracts:
+vars self: width,height,data(0s,1s)
+constants:self.CELLS_PER_INT=30
+overides:__getitem__,__setitem__,__str__,__eq__,__hash__
+

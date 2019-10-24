@@ -4,7 +4,7 @@
 # educational purposes provided that (1) you do not distribute or publish
 # solutions, (2) you retain this notice, and (3) you provide clear
 # attribution to UC Berkeley, including a link to http://ai.berkeley.edu.
-# 
+#
 # Attribution Information: The Pacman AI projects were developed at UC Berkeley.
 # The core projects and autograders were primarily created by John DeNero
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
@@ -287,6 +287,9 @@ class CornersProblem(search.SearchProblem):
         self._expanded = 0 # DO NOT CHANGE; Number of search nodes expanded
         # Please add any code here which you would like to use
         # in initializing the problem
+        self.visitedCorners= [0,0,0,0]
+
+        """ Mine comments:the idea is that a game state is (postition,remainingFood) """
         "*** YOUR CODE HERE ***"
 
     def getStartState(self):
@@ -295,14 +298,18 @@ class CornersProblem(search.SearchProblem):
         space)
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        # util.raiseNotDefined()
+        return (self.startingPosition,tuple(self.visitedCorners)) #graphSearch supports only tuple beacuse of hash
+
 
     def isGoalState(self, state):
         """
         Returns whether this search state is a goal state of the problem.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+
+        isGoal = state[1]==(1,1,1,1) # if pacman has eaten all the food end.
+        return  isGoal
 
     def getSuccessors(self, state):
         """
@@ -323,7 +330,20 @@ class CornersProblem(search.SearchProblem):
             #   dx, dy = Actions.directionToVector(action)
             #   nextx, nexty = int(x + dx), int(y + dy)
             #   hitsWall = self.walls[nextx][nexty]
+            x,y = state[0] # get position
+            food = list(state[1]) # get food state
+            # Find next move
+            dx, dy = Actions.directionToVector(action)
+            nextx, nexty = int(x + dx), int(y + dy)
 
+            # If move is valid (not walls)
+            if not self.walls[nextx][nexty]:
+                nextState = (nextx, nexty)
+                # if nextState is a corner
+                if nextState in self.corners:
+                    food[self.corners.index(nextState)] = 1 # visited
+
+                successors.append( ( (nextState,tuple(food)), action, 1) ) # cost is constant
             "*** YOUR CODE HERE ***"
 
         self._expanded += 1 # DO NOT CHANGE
@@ -360,7 +380,54 @@ def cornersHeuristic(state, problem):
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
 
     "*** YOUR CODE HERE ***"
-    return 0 # Default to trivial solution
+    """minimum manhattanDistance from multiplied by the corners"""
+    actives = []
+    node = state[0]
+    for i,corn in enumerate(state[1]):
+        if not corn:
+            activeCorner = corners[i]
+            actives.append(activeCorner)
+    if not actives: return 0
+    distanceMan =[]
+    distanceEuc =[]
+    for activeCorn in actives:
+        distanceMan.append(util.manhattanDistance(activeCorn,node))
+        distanceEuc.append(Euclidean(activeCorn,node))
+
+    # distanceMan.sort()
+    # distanceEuc.sort()
+    # if distanceEuc[0]==distanceMan[0]:
+    distance= distanceMan[0]
+    # else:
+    #     distance = distanceMan[0]-distanceEuc[0]
+    numActives = len(actives)
+    # closest,distance = findClosest(actives,node)
+    # actives.remove(closest)
+    # sumRemaining = cornersDistance(actives,closest)
+    # return distance+sumRemaining
+    # return 0 # Default to trivial solution
+    return distance
+
+def cornersDistance(corners,closest):
+    cornersList=list(corners)
+    current=closest
+    sum = 0
+    while cornersList:
+        corn,distance = findClosest(cornersList,current)
+        sum+=distance
+        cornersList.remove(corn)
+
+    return sum
+
+def findClosest(corners,current):
+    distance=[]
+    for corn in corners:
+        distance.append(Euclidean(corn,current))
+    closestIndex = distance.index(min(distance))
+    return corners[closestIndex],min(distance)
+
+def Euclidean(xy1,xy2):
+    return ( (xy1[0] - xy2[0]) ** 2 + (xy1[1] - xy2[1]) ** 2 ) ** 0.5
 
 class AStarCornersAgent(SearchAgent):
     "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
@@ -483,9 +550,9 @@ class ClosestDotSearchAgent(SearchAgent):
         food = gameState.getFood()
         walls = gameState.getWalls()
         problem = AnyFoodSearchProblem(gameState)
-
+        return search.astar(problem)
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        # util.raiseNotDefined()
 
 class AnyFoodSearchProblem(PositionSearchProblem):
     """
@@ -519,9 +586,11 @@ class AnyFoodSearchProblem(PositionSearchProblem):
         complete the problem definition.
         """
         x,y = state
+        isGoal = self.food[x][y]==True
+        return isGoal
 
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        # util.raiseNotDefined()
 
 def mazeDistance(point1, point2, gameState):
     """

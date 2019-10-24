@@ -246,12 +246,12 @@ def graphSearch(problem,strategy,priorityFn = None):
 
     #initialization phase create tree(root and root children) and fringe.
     if strategy == 'astar':
-        print priorityFn
         fringe = FringeHeur(problem,priorityFn,strategy)
     else:
         fringe = Fringe(strategy)
     state = problem.getStartState()
     explored = Tree(state)
+    if problem.isGoalState(state):return []
     for child in fringe.Expand(problem, explored.getNode(state).getState()):
         childnode = Node(child[0],child[1],child[2],explored.getNode(state))
         fringe.QueuingFn(childnode)
