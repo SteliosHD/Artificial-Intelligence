@@ -46,14 +46,16 @@ def cornersDistance(corners,closest):
 
     return sum
 
-def findClosest(corners,current):
+def findFurthest(corners,current):
     distance=[]
     for corn in corners:
         distance.append(util.manhattanDistance(corn,current))
-    closestIndex = distance.index(min(distance))
+    furtherIndex = distance.index(max(distance))
     # print corners[closestIndex],min(distance)
-    return corners[closestIndex],min(distance)
+    return corners[furtherIndex],max(distance)
 
+def Euclidean(xy1,xy2):
+    return ( (xy1[0] - xy2[0]) ** 2 + (xy1[1] - xy2[1]) ** 2 ) ** 0.5
 
 if __name__ == '__main__':
     testState1=((2,2),(1,1,1,1))
