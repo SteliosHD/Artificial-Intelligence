@@ -4,7 +4,7 @@
 # educational purposes provided that (1) you do not distribute or publish
 # solutions, (2) you retain this notice, and (3) you provide clear
 # attribution to UC Berkeley, including a link to http://ai.berkeley.edu.
-# 
+#
 # Attribution Information: The Pacman AI projects were developed at UC Berkeley.
 # The core projects and autograders were primarily created by John DeNero
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
@@ -15,6 +15,7 @@
 from util import manhattanDistance
 from game import Directions
 import random, util
+import math
 
 from game import Agent
 
@@ -72,9 +73,29 @@ class ReflexAgent(Agent):
         newFood = successorGameState.getFood()
         newGhostStates = successorGameState.getGhostStates()
         newScaredTimes = [ghostState.scaredTimer for ghostState in newGhostStates]
-
         "*** YOUR CODE HERE ***"
-        return successorGameState.getScore()
+        food =currentGameState.getFood()
+        pos = currentGameState.getPacmanPosition()
+        ghostPos = currentGameState.getGhostPosition(1)
+        newGhostPos = successorGameState.getGhostPosition(1)
+        newScore = successorGameState.getScore()
+
+        dist1=[]
+        for i,itemI in enumerate(food):
+              for j,itemJ in enumerate(itemI):
+                    if itemJ:
+                          dist1.append(manhattanDistance(newPos,(i,j)))
+
+        dist1.sort()
+        if dist1:
+            minitem=dist1[0]
+        else:
+            minitem=0
+
+        val =(100/(minitem+0.1))-(120/(manhattanDistance(newPos,ghostPos)+0.1)) 
+
+        return val
+       # return successorGameState.getScore()
 
 def scoreEvaluationFunction(currentGameState):
     """
@@ -129,7 +150,67 @@ class MinimaxAgent(MultiAgentSearchAgent):
             Returns the total number of agents in the game
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+
+        numAgents = gameState.getNumAgents()
+
+        def maxValue(self, gameState):
+          depth += 1 
+          if depth == self.depth: return self.evaluationFunction
+          v = -float('inf')
+          actions = []    
+          for action in gameState.getLegalActions(0):
+                for suc in gameState.generateSuccessor(0,action).getLegalActions(0):
+                  actions.append((maxValue(suc),action))
+          maxi= -float('inf')
+          maxAction = None
+          for item in actions :
+                if item[0]>maxi:
+                      maxi=item[0]
+                      maxAction=item[1]
+          v = maxi
+          return v          
+        
+        def minValue(self, gameState):
+              depth += 1
+              if depth == self.depth: return self.evaluationFunction
+              v = float('inf')
+              actions = []    
+              for action in gameState.getLegalActions(i):
+                    for suc in gameState.generateSuccessor(i,action).getLegalActions(i):
+                      actions.append((maxValue(suc),action))
+              mini = float('inf')
+              minAction = None
+              for item in actions :
+                    if item[0]>min:
+                          mini=item[0]
+                          minAction=item[1]
+              v = mini
+              return mini
+        listActions=[]
+
+        for i in range(1,numAgents+1):
+          depth = 0
+          actions = []    
+          for action in gameState.getLegalActions(0):
+                for suc in gameState.generateSuccessor(0,action).getLegalActions(0):
+                  actions.append((minValue(suc),action))
+          maxi= -float('inf')
+          maxAction = None
+          for item in actions :
+                if item[0]>maxi:
+                      maxi=item[0]
+                      maxAction=item[1]
+          listActions.append((maxi,maxAction))
+        
+        finalMax = -float('inf')
+        finalAction=None
+        for item in listActions:
+              if item[0]>max:
+                    finalMax=item[0]
+                    finalAction=item[1]
+        return finalAction 
+
+        # util.raiseNotDefined()
 
 class AlphaBetaAgent(MultiAgentSearchAgent):
     """
@@ -170,4 +251,3 @@ def betterEvaluationFunction(currentGameState):
 
 # Abbreviation
 better = betterEvaluationFunction
-
