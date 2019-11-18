@@ -4,7 +4,7 @@
 # educational purposes provided that (1) you do not distribute or publish
 # solutions, (2) you retain this notice, and (3) you provide clear
 # attribution to UC Berkeley, including a link to http://ai.berkeley.edu.
-# 
+#
 # Attribution Information: The Pacman AI projects were developed at UC Berkeley.
 # The core projects and autograders were primarily created by John DeNero
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
@@ -15,6 +15,7 @@
 from util import manhattanDistance
 from game import Directions
 import random, util
+import math
 
 from game import Agent
 
@@ -72,8 +73,26 @@ class ReflexAgent(Agent):
         newFood = successorGameState.getFood()
         newGhostStates = successorGameState.getGhostStates()
         newScaredTimes = [ghostState.scaredTimer for ghostState in newGhostStates]
-
+        ghostPos = successorGameState.getGhostPosition(1)
         "*** YOUR CODE HERE ***"
+        L=[]
+        count=0
+        for indexI,itemI in enumerate(newFood):
+            for indexJ,itemJ in enumerate(itemI):
+                if itemJ:
+                    L.append(manhattanDistance(newPos,(indexI,indexJ)))
+                    count +=1
+
+        L.sort()
+
+        if L:
+            val =40-count-0.5*L[0]+4*math.log(manhattanDistance(newPos, ghostPos)+0.001)
+            print val
+            return val
+        else:
+            # print math.log(manhattanDistance(newPos, ghostPos)+0.1)
+            return 40-math.log(manhattanDistance(newPos, ghostPos)+0.1)
+
         return successorGameState.getScore()
 
 def scoreEvaluationFunction(currentGameState):
@@ -170,4 +189,3 @@ def betterEvaluationFunction(currentGameState):
 
 # Abbreviation
 better = betterEvaluationFunction
-
