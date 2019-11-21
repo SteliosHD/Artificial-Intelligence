@@ -92,7 +92,7 @@ class ReflexAgent(Agent):
         else:
             minitem=0
 
-        val =(100/(minitem+0.1))-(120/(manhattanDistance(newPos,ghostPos)+0.1)) 
+        val =(100/(minitem+0.1))-(120/(manhattanDistance(newPos,ghostPos)+0.1))
 
         return val
        # return successorGameState.getScore()
@@ -150,104 +150,76 @@ class MinimaxAgent(MultiAgentSearchAgent):
             Returns the total number of agents in the game
         """
         "*** YOUR CODE HERE ***"
-        listActions =[]
-        
-        # for i in range(1,gameState.getNumAgents()):
-        #       self.agentIndex=i
-        #       listActions.append(self.minimax(gameState))
-        # # import pdb; pdb.set_trace()
-        # return MinimaxAgent.getFinalAction1(listActions)
         return self.minimax(gameState)
-    @staticmethod          
-    def getFinalAction1(listActions):
-          finalMax = -float('inf')
-          finalAction=None
-          # import pdb; pdb.set_trace()
-          for item in listActions:
-                if item[0]>finalMax:
-                      finalMax=item[0]
-                      finalAction=item[1]
-          return finalAction 
-    @staticmethod          
-    def getFinalAction2(listActions):
-        finalMin = float('inf')
-        finalAction=None
-        # import pdb; pdb.set_trace()
-        for item in listActions:
-              if item[0]<=finalMin:
-                    finalMin=item[0]
-                    finalAction=item[1]
-        return finalAction      
-    @staticmethod          
-    def getFinalAction3(listActions):
-        dire=['North','South','East','West','Stop']
-        l =[item[1] for item in listActions]
-        finalMax = -float('inf')
-        finalAction=None
-        # import pdb; pdb.set_trace()
-        for act in dire:
-              if l.count(act)>finalMax:
-                    finalMax=l.count(act)
-                    finalAction = act
-        return finalAction
-    
 
     def minimax(self, gameState):
         # import pdb; pdb.set_trace()
-        self.curDepth = 0
-        self.agentIndex = range(1,gameState.getNumAgents())[0]
+        curDepth = 0
+        agentIndex = 0
+        self.numAgents = gameState.getNumAgents()
         actions = []
-        for action in gameState.getLegalActions(0):
-              self.curDepth += 1
-              actions.append((self.minValue(gameState.generateSuccessor(0,action)),action ))
-              self.curDepth -= 1
-        
+        for action in gameState.getLegalActions(agentIndex):
+            actions.append((self.minValue(gameState.generateSuccessor(agentIndex,action),curDepth+1,agentIndex+1),action))
+        return MinimaxAgent.maxAction(actions)
+
+    def maxValue(self, gameState, curDepth, agentIndex):
+        # import pdb; pdb.set_trace()
+        if curDepth == self.depth or curDepth == self.depth+1 or gameState.isLose() or gameState.isWin():
+            # import pdb; pdb.set_trace()
+            return self.evaluationFunction(gameState)
+        agentIndexRe = agentIndex % self.numAgents
+        if agentIndexRe == 0:
+            v = -float('inf')
+            for action in gameState.getLegalActions(agentIndexRe):
+                v=max(v,self.minValue(gameState.generateSuccessor(agentIndexRe,action),curDepth+1,agentIndexRe+1))
+            return v
+        else:
+            v = -float('inf')
+            for action in gameState.getLegalActions(agentIndexRe):
+                v=max(v,self.maxValue(gameState.generateSuccessor(agentIndexRe,action),curDepth,agentIndexRe+1))
+            return v
+
+
+    def minValue(self, gameState, curDepth, agentIndex):
+        # import pdb; pdb.set_trace()
+        if curDepth==self.depth+1 or gameState.isLose() or gameState.isWin():
+            # import pdb; pdb.set_trace()
+            return self.evaluationFunction(gameState)
+        agentIndexRe = agentIndex % self.numAgents
+        if agentIndexRe == self.numAgents-1:
+            v = float('inf')
+            for action in gameState.getLegalActions(agentIndexRe):
+                v=min(v,self.maxValue(gameState.generateSuccessor(agentIndexRe,action),curDepth,agentIndexRe+1))
+            return v
+        else:
+            v = float('inf')
+            for action in gameState.getLegalActions(agentIndexRe):
+                v=min(v,self.minValue(gameState.generateSuccessor(agentIndexRe,action),curDepth,agentIndexRe+1))
+            return v
+
+ #*******************************
+ #       Static methods         *
+ #*******************************
+    @staticmethod
+    def getFinalAction1(listActions):
+        finalMax = -float('inf')
+        finalAction=None
+        # import pdb; pdb.set_trace()
+        for item in listActions:
+            if item[0]>finalMax:
+                finalMax=item[0]
+                finalAction=item[1]
+        return finalAction
+
+    @staticmethod
+    def maxAction(actions):
         maxi= -float('inf')
         maxAction = None
         for item in actions :
-              if item[0]>=maxi:
-                    maxi=item[0]
-                    maxAction=item[1]
-        # import pdb; pdb.set_trace()
+            if item[0]>=maxi:
+                maxi=item[0]
+                maxAction=item[1]
         return maxAction
-
-    def maxValue(self, gameState):
-      # import pdb; pdb.set_trace()
-      self.agentIndex = range(1,gameState.getNumAgents())[0]
-      if self.curDepth==self.depth+1 or gameState.isLose() or gameState.isWin():
-            # import pdb; pdb.set_trace()
-            
-            return self.evaluationFunction(gameState)
-      
-      v = -float('inf')
-      for action in gameState.getLegalActions(0):
-              self.curDepth += 1
-              v=max(v,self.minValue(gameState.generateSuccessor(0,action)))
-              self.curDepth -= 1
-      return v      
-
-    
-    def minValue(self, gameState):
-      # import pdb; pdb.set_trace()
-      curIndex = self.agentIndex
-      if self.curDepth==self.depth+1 or gameState.isLose() or gameState.isWin():
-            # import pdb; pdb.set_trace()
-            
-            return self.evaluationFunction(gameState)
-      import pdb; pdb.set_trace()
-      if self.agentIndex != range(1,gameState.getNumAgents())[-1]:
-            v = float('inf')
-            self.agentIndex += 1
-            for action in gameState.getLegalActions(curIndex):
-                    v=min(v,self.minValue(gameState.generateSuccessor(curIndex,action)))
-            return v 
-      else:     
-            v = float('inf')  
-            for action in gameState.getLegalActions(self.agentIndex):
-                    self.curDepth += 1
-                    v=min(v,self.maxValue(gameState.generateSuccessor(self.agentIndex,action)))
-                    self.curDepth -= 1
-            return v     
 
 class AlphaBetaAgent(MultiAgentSearchAgent):
     """
@@ -259,7 +231,96 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
           Returns the minimax action using self.depth and self.evaluationFunction
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        return self.AlphaBetaminimax(gameState)
+
+    def AlphaBetaminimax(self, gameState):
+        # import pdb; pdb.set_trace()
+        curDepth = 0
+        agentIndex = 0
+        self.numAgents = gameState.getNumAgents()
+        actions = []
+        alpha = -float('inf')
+        beta  =  float('inf')
+        for action in gameState.getLegalActions(agentIndex):
+
+            value,alpha= (self.minValue(gameState.generateSuccessor(agentIndex,action),curDepth+1,agentIndex+1,alpha,beta))
+            actions.append((value,action))
+        return AlphaBetaAgent.maxAction(actions)
+
+    def maxValue(self, gameState, curDepth, agentIndex,alpha,beta):
+        # import pdb; pdb.set_trace()
+        if curDepth == self.depth or curDepth == self.depth+1 or gameState.isLose() or gameState.isWin():
+            # import pdb; pdb.set_trace()
+            return self.evaluationFunction(gameState),alpha
+        agentIndexRe = agentIndex % self.numAgents
+        if agentIndexRe == 0:
+            v = -float('inf')
+            for action in gameState.getLegalActions(agentIndexRe):
+                value,beta=self.minValue(gameState.generateSuccessor(agentIndexRe,action),curDepth+1,agentIndexRe+1,alpha,beta)
+                v = max(v, value)
+                if v > beta :
+                    return v,alpha
+                alpha = max(alpha,v)
+            return v,alpha
+        else:
+            v = -float('inf')
+            for action in gameState.getLegalActions(agentIndexRe):
+                value,alpha= self.maxValue(gameState.generateSuccessor(agentIndexRe,action),curDepth,agentIndexRe+1,alpha,beta)
+                v=max(v,value)
+                if v > beta :
+                    return v,alpha
+                alpha = max(alpha,v)
+            return v,alpha
+
+    def minValue(self, gameState, curDepth, agentIndex,alpha,beta):
+        # import pdb; pdb.set_trace()
+        if curDepth==self.depth+1 or gameState.isLose() or gameState.isWin():
+            # import pdb; pdb.set_trace()
+            return self.evaluationFunction(gameState),beta
+        agentIndexRe = agentIndex % self.numAgents
+        if agentIndexRe == self.numAgents-1:
+            v = float('inf')
+            for action in gameState.getLegalActions(agentIndexRe):
+                value,alpha= self.maxValue(gameState.generateSuccessor(agentIndexRe,action),curDepth,agentIndexRe+1,alpha,beta)
+                v=min(v,value)
+                if v<alpha :
+                    return v,beta
+                beta = min(beta,v)
+            return v,beta
+        else:
+            v = float('inf')
+            for action in gameState.getLegalActions(agentIndexRe):
+                value,beta= self.minValue(gameState.generateSuccessor(agentIndexRe,action),curDepth,agentIndexRe+1,alpha,beta)
+                v=min(v,value)
+                if v<alpha :
+                    return v,beta
+                beta = min(beta,v)
+            return v,beta
+
+ #*******************************
+ #       Static methods         *
+ #*******************************
+    @staticmethod
+    def getFinalAction1(listActions):
+        finalMax = -float('inf')
+        finalAction=None
+        # import pdb; pdb.set_trace()
+        for item in listActions:
+            if item[0]>finalMax:
+                finalMax=item[0]
+                finalAction=item[1]
+        return finalAction
+
+    @staticmethod
+    def maxAction(actions):
+        maxi= -float('inf')
+        maxAction = None
+        for item in actions :
+            if item[0]>=maxi:
+                maxi=item[0]
+                maxAction=item[1]
+        return maxAction
+
 
 class ExpectimaxAgent(MultiAgentSearchAgent):
     """
