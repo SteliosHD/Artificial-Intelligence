@@ -119,3 +119,78 @@
                          finalAction = act
                 return finalAction
 test_cases/q3/2-2b-vary-depth
+        for action in gameState.getLegalActions(agentIndex):
+            value=(self.minValue(gameState.generateSuccessor(agentIndex,action),curDepth+1,agentIndex+1))
+            if value>v:
+                v=value
+                maxAction=action
+            elif value==v:
+                if action !='Stop':
+                    v=value
+                    maxAction=action
+            actions.append((v,action))
+        # return MinimaxAgent.maxAction(actions)
+        return maxAction
+
+
+        for action in gameState.getLegalActions(agentIndex):
+            value=(self.minValue(gameState.generateSuccessor(agentIndex,action),curDepth,agentIndex))
+            if value>v:
+                v=value
+                maxAction=action
+            elif value==v:
+                if action !='Stop':
+                    v=value
+                    maxAction=action
+            actions.append((v,action))
+        # return MinimaxAgent.maxAction(actions)
+        return maxAction
+        if agentIndexRe == 0:
+            v = -float('inf')
+            for action in gameState.getLegalActions(agentIndexRe):
+                v=max(v,self.minValue(gameState.generateSuccessor(agentIndexRe,action),curDepth+1,agentIndexRe+1))
+            return v
+        else:
+            v = -float('inf')
+            for action in gameState.getLegalActions(agentIndexRe):
+                v=max(v,self.maxValue(gameState.generateSuccessor(agentIndexRe,action),curDepth,agentIndexRe+1))
+            return v
+
+                agentIndexRe = agentIndex % self.numAgents
+        if agentIndexRe == self.numAgents-1:
+            v = float('inf')
+            for action in gameState.getLegalActions(agentIndexRe):
+                v=min(v,self.maxValue(gameState.generateSuccessor(agentIndexRe,action),curDepth,agentIndexRe+1))
+            return v
+        else:
+            v = float('inf')
+            for action in gameState.getLegalActions(agentIndexRe):
+                v=min(v,self.minValue(gameState.generateSuccessor(agentIndexRe,action),curDepth,agentIndexRe+1))
+            return v
+
+
+
+
+ #*******************************
+ #       Static methods         *
+ #*******************************
+    @staticmethod
+    def getFinalAction1(listActions):
+        finalMax = -float('inf')
+        finalAction=None
+        # import pdb; pdb.set_trace()
+        for item in listActions:
+            if item[0]>finalMax:
+                finalMax=item[0]
+                finalAction=item[1]
+        return finalAction
+
+    @staticmethod
+    def maxAction(actions):
+        maxi= -float('inf')
+        maxAction = None
+        for item in actions :
+            if item[0]>maxi:
+                maxi=item[0]
+                maxAction=item[1]
+        return maxAction
