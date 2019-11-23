@@ -68,43 +68,77 @@ class ReflexAgent(Agent):
         to create a masterful evaluation function.
         """
         # Useful information you can extract from a GameState (pacman.py)
+        # successorGameState = currentGameState.generatePacmanSuccessor(action)
+        # newPos = successorGameState.getPacmanPosition()
+        # "*** YOUR CODE HERE ***"
+        # # get some values
+        # food =currentGameState.getFood()
+        # ghostPos = currentGameState.getGhostPosition(1)
+        # newGhostPos = successorGameState.getGhostPosition(1)
+        # newScore = successorGameState.getScore()
+        #
+        #
+        # closefood = closestFood(newPos,food)
+        # # add some weights to the values that generates the score value if foodWeigh > ghostWeigh
+        # # pacman risks more and rushes for food else pacman tries first to stay alive
+        # # if these values are relative close pacman is balanced
+        # foodWeigh = 100
+        # ghostWeigh = 120
+        #
+        # # calculate the val where states closer to food are important but also avoid ghosts
+        # val = (foodWeigh/(minitem + 0.1))-(ghostWeigh/(manhattanDistance(newPos, ghostPos) + 0.1))
+        #
+        # return val
+
         successorGameState = currentGameState.generatePacmanSuccessor(action)
         newPos = successorGameState.getPacmanPosition()
-        newFood = successorGameState.getFood()
-        newGhostStates = successorGameState.getGhostStates()
-        newScaredTimes = [ghostState.scaredTimer for ghostState in newGhostStates]
-        "*** YOUR CODE HERE ***"
-        # get some values
-        food =currentGameState.getFood()
-        pos = currentGameState.getPacmanPosition()
-        ghostPos = currentGameState.getGhostPosition(1)
-        newGhostPos = successorGameState.getGhostPosition(1)
-        newScore = successorGameState.getScore()
+        if successorGameState.isWin():
+            return 10**33
+        elif successorGameState.isLose():
+            return -10**36
 
-        # find the manhattanDistance of the new pacman position and the available food
-        dist1 = []
+
+        pacmanPos = successorGameState.getPacmanPosition()
+        capsules  = successorGameState.getCapsules()
+        GhostsPos = successorGameState.getGhostPositions()
+        food      = successorGameState.getFood()
+
+        foodCount = 0
         for i, itemI in enumerate(food):
             for j, itemJ in enumerate(itemI):
                 if itemJ:
-                    dist1.append(manhattanDistance(newPos, (i, j)))
-
-        # get the closest food
-        dist1.sort()
-        if dist1:
-            minitem = dist1[0]
+                    foodCount += 1
+        if capsules:
+            capsulesFactor = 5.0/len(capsules)
         else:
-            minitem = 0
+            capsulesFactor= 10
 
-        # add some weights to the values that generates the score value if foodWeigh > ghostWeigh
-        # pacman risks more and rushes for food else pacman tries first to stay alive
-        # if these values are relative close pacman is balanced
-        foodWeigh = 100
-        ghostWeigh = 120
+        if foodCount > 25:
+            foodFactor = 50.0/foodCount
+        else:
+            foodFactor = 25.0/foodCount
 
-        # calculate the val where states closer to food are important but also avoid ghosts
-        val = (foodWeigh/(minitem + 0.1))-(ghostWeigh/(manhattanDistance(newPos, ghostPos) + 0.1))
+        if successorGameState.getNumAgents() > 1:
+            agentFactor = 1.5/(successorGameState.getNumAgents()-1)
+        else:
+            agentFactor = 0
 
-        return val
+
+        closefood = closestFood(newPos, food)
+        closeghost = closestGhost(newPos, GhostsPos)
+        closecapsules = closestCapsule(newPos, capsules)
+        farfood = farthestFood(newPos,food)
+
+        x = (foodFactor/(farfood+0.5))
+        y = (foodFactor/(closefood+0.2))
+        z = (agentFactor/(closeghost+0.2))
+        w = (capsulesFactor/(closecapsules+0.2))
+        q = foodFactor
+        t = capsulesFactor
+        score = successorGameState.getScore()
+        value = q+x+y-z+w+score+t
+
+        return value
 
 
 def scoreEvaluationFunction(currentGameState):
@@ -176,7 +210,7 @@ class MinimaxAgent(MultiAgentSearchAgent):
         if curDepth == self.depth and agentIndex % self.numAgents == 0:
             return self.evaluationFunction(gameState), None
 
-        # if agent 0 return maxValue else return minValue (after increasing agent every time modulo numAgents gives the agentIndex)
+        # if agent 0 return maxValue else return minValue (after increasing agent every time by 1, modulo numAgents gives the agentIndex)
         if agentIndex % self.numAgents == 0 :
             return self.maxValue(gameState, agentIndex % self.numAgents, curDepth)
         else:
@@ -194,7 +228,7 @@ class MinimaxAgent(MultiAgentSearchAgent):
         maxAction = None
 
         # create all the successors at once since minimax will expand the whole tree.
-        successors = [(gameState.generateSuccessor(agentIndex, action),action ) for action in gameState.getLegalActions(agentIndex)]
+        successors = [(gameState.generateSuccessor(agentIndex, action), action) for action in gameState.getLegalActions(agentIndex)]
 
         for sucState,action in successors:
             value, sucAction = self.minimax(sucState, agentIndex+1, curDepth+1)  # increase the agent and depth since we are on a max node again, sucAction dummy variable
@@ -218,7 +252,7 @@ class MinimaxAgent(MultiAgentSearchAgent):
         minAction = None
 
         # create all the successors at once since minimax will expand the whole tree.
-        successors = [(gameState.generateSuccessor(agentIndex, action),action ) for action in gameState.getLegalActions(agentIndex)]
+        successors = [(gameState.generateSuccessor(agentIndex, action), action) for action in gameState.getLegalActions(agentIndex)]
         for sucState, action in successors:
             value, sucAction = self.minimax(sucState, agentIndex+1, curDepth)  # increase the agent but not the depth, sucAction dummy variable
 
@@ -256,7 +290,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
         if curDepth == self.depth and agentIndex % self.numAgents == 0:
             return self.evaluationFunction(gameState), None
 
-        # if agent 0 return maxValue else return minValue (after increasing agent every time modulo numAgents gives the agentIndex)
+        # if agent 0 return maxValue else return minValue (after increasing agent every time by 1, modulo numAgents gives the agentIndex)
         if agentIndex % self.numAgents == 0:
             return self.maxValue(gameState, agentIndex % self.numAgents, curDepth, alpha, beta)
         else:
@@ -278,11 +312,10 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
 
         # in order to avoid creating all the successors states at once we generate the legal actions and one by one getting the successors
         # if we perform pruning we don't get any unnecessary successors
-        legalActions = gameState.getLegalActions(agentIndex)
-        for action in legalActions:
+        for action in gameState.getLegalActions(agentIndex):
 
             # generate successor state
-            sucState = gameState.generateSuccessor(agentIndex,action)
+            sucState = gameState.generateSuccessor(agentIndex, action)
             value, sucAction = self.AlphaBetaminimax(sucState, agentIndex+1, curDepth+1, alpha, beta)  # increase the agent and depth since we are on a max node again pass alpha and beta, sucAction dummy variable
 
             # update the max value and keep the action of max value
@@ -317,8 +350,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
 
         # in order to avoid creating all the successors states at once we generate the legal actions and one by one getting the successors
         # if we perform pruning we don't get any unnecessary successors
-        legalActions = gameState.getLegalActions(agentIndex)
-        for action in legalActions:
+        for action in gameState.getLegalActions(agentIndex):
 
             # generate successor state
             sucState = gameState.generateSuccessor(agentIndex,action)
@@ -351,7 +383,72 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
           legal moves.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        curDepth = 0
+        agentIndex = 0
+        self.numAgents = gameState.getNumAgents()
+
+        maxValue, maxAction = self.expectimax(gameState, agentIndex, curDepth)  # get the maximum action , maxValue dummy variable
+        return maxAction
+
+    def expectimax(self, gameState, agentIndex, curDepth):
+        """Expectimax function that handles the cases and calls the appropriate function"""
+
+        # if terminal state
+        if curDepth == self.depth and agentIndex % self.numAgents == 0:
+            return self.evaluationFunction(gameState), None
+
+        # if agent 0 return maxValue else return chanceValue (after increasing agent every time by 1, modulo numAgents gives the agentIndex)
+        if agentIndex % self.numAgents == 0 :
+            return self.maxValue(gameState, agentIndex % self.numAgents, curDepth)
+        else:
+            return self.chanceValue(gameState,agentIndex % self.numAgents, curDepth)
+
+    def maxValue(self, gameState, agentIndex, curDepth):
+        """Max function that computes the maximum action and returns maximum,maximum action"""
+
+        # if terminal state
+        if gameState.isLose() or gameState.isWin():
+            return self.evaluationFunction(gameState), None
+
+        # initialize the value(v) and the action to be returned
+        v = -float('inf')
+        maxAction = None
+
+        # create all the successors at once since minimax will expand the whole tree.
+        successors = [(gameState.generateSuccessor(agentIndex, action), action) for action in gameState.getLegalActions(agentIndex)]
+
+        for sucState,action in successors:
+            value, sucAction = self.expectimax(sucState, agentIndex+1, curDepth+1)  # increase the agent and depth since we are on a max node again, sucAction dummy variable
+
+            # update the max value and keep the action of max value
+            if value > v:
+                v = value
+                maxAction = action
+
+        return v, maxAction
+
+    def chanceValue(self, gameState, agentIndex, curDepth):
+        """Chance function that computes the average of all actions based on some probability and returns the value"""
+
+        # if terminal state
+        if gameState.isLose() or gameState.isWin():
+            return self.evaluationFunction(gameState), None
+
+        # initialize the value(vSum)
+        vSum = 0
+
+        # create all the successors at once since minimax will expand the whole tree.
+        successors = [(gameState.generateSuccessor(agentIndex, action), action) for action in gameState.getLegalActions(agentIndex)]
+
+        # create an equally distributed prob for all successors
+        prob = [1.0/float(len(successors)) for i in range(len(successors))]
+        for index, (sucState, action) in enumerate(successors):
+            value, sucAction = self.expectimax(sucState, agentIndex+1, curDepth)  # increase the agent but not the depth, sucAction dummy variable
+
+            # add the value multiplied with the probability to the sum
+            vSum += value*prob[index]
+        return vSum, None  # no actions here
+
 
 def betterEvaluationFunction(currentGameState):
     """
@@ -361,7 +458,114 @@ def betterEvaluationFunction(currentGameState):
       DESCRIPTION: <write something here so we know what you did>
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
 
+
+    if currentGameState.isWin():
+        return 10**33
+    elif currentGameState.isLose():
+        return -10**33
+
+
+    pacmanPos = currentGameState.getPacmanPosition()
+    capsules  = currentGameState.getCapsules()
+    GhostsPos = currentGameState.getGhostPositions()
+    food      = currentGameState.getFood()
+
+    foodCount = 0
+    for i, itemI in enumerate(food):
+        for j, itemJ in enumerate(itemI):
+            if itemJ:
+                foodCount += 1
+    if capsules:
+        capsulesFactor = 5.0/len(capsules)
+    else:
+        capsulesFactor= 0
+
+    if foodCount > 25:
+        foodFactor = 50.0/foodCount
+    else:
+        foodFactor = 25.0/foodCount
+
+    if currentGameState.getNumAgents() > 1:
+        agentFactor = 1.1/(currentGameState.getNumAgents()-1)
+    else:
+        agentFactor = 0
+
+
+    closefood = closestFood(pacmanPos, food)
+    closeghost = closestGhost(pacmanPos, GhostsPos)
+    closecapsules = closestCapsule(pacmanPos, capsules)
+    farfood = farthestFood(pacmanPos,food)
+
+    x = (foodFactor/(farfood+0.5))
+    y = (foodFactor/(closefood+0.2))
+    z = (agentFactor/(closeghost+0.2))
+    w = (capsulesFactor/(closecapsules+0.2))
+    q = foodFactor
+    t = capsulesFactor
+    score = currentGameState.getScore()
+    value = q+x+y-z+w+score+t
+
+    return value
+
+
+
+def closestFood(pacmanPos,food):
+    dist = []
+    for i, itemI in enumerate(food):
+        for j, itemJ in enumerate(itemI):
+            if itemJ:
+                dist.append(manhattanDistance(pacmanPos, (i, j)))
+
+    # get the closest food
+    dist.sort()
+    if dist:
+        minitem = dist[0]
+    else:
+        minitem = 0
+
+    return minitem
+def farthestFood(pacmanPos,food):
+    dist = []
+    for i, itemI in enumerate(food):
+        for j, itemJ in enumerate(itemI):
+            if itemJ:
+                dist.append(euclideanDistance(pacmanPos, (i, j)))
+
+    # get the farthest food
+    dist.sort(reverse=True)
+    if dist:
+        minitem = dist[0]
+    else:
+        minitem = 0
+
+    return minitem
+
+def closestGhost(pacmanPos,GhostsPos):
+    dist = []
+    for ghost in GhostsPos:
+        dist.append(euclideanDistance(pacmanPos, ghost))
+    dist.sort()
+    if dist:
+        minitem = dist[0]
+    else:
+        minitem = 0
+    return minitem
+
+def closestCapsule(pacmanPos,capsules):
+    dist = []
+    for capsule in capsules:
+        dist.append(euclideanDistance(pacmanPos, capsule))
+    dist.sort()
+    if dist:
+        minitem = dist[0]
+    else:
+        minitem = 0
+    return minitem
+
+def euclideanDistance(xy1,xy2):
+    "The Euclidean distance heuristic for a PositionSearchProblem"
+    return ( (xy1[0] - xy2[0]) ** 2 + (xy1[1] - xy2[1]) ** 2 ) ** 0.5
 # Abbreviation
 better = betterEvaluationFunction
+

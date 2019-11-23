@@ -194,3 +194,43 @@ test_cases/q3/2-2b-vary-depth
                 maxi=item[0]
                 maxAction=item[1]
         return maxAction
+
+  def mazeDistance(point1, point2, gameState):
+    """
+    Returns the maze distance between any two points, using the search functions
+    you have already built. The gameState can be any game state -- Pacman's
+    position in that state is ignored.
+
+    Example usage: mazeDistance( (2,4), (5,6), gameState)
+
+    This might be a useful helper function for your ApproximateSearchAgent.
+    """
+    x1, y1 = point1
+    x2, y2 = point2
+    walls = gameState.getWalls()
+    assert not walls[x1][y1], 'point1 is a wall: ' + str(point1)
+    assert not walls[x2][y2], 'point2 is a wall: ' + str(point2)
+    prob = PositionSearchProblem(gameState, start=point1, goal=point2, warn=False, visualize=False)
+    return len(search.bfs(prob))
+
+
+    if foodCount ==1:
+        pass
+
+    x,y,z,w = (float(e)/(ffood+0.1)),(float(b)/(clfood+0.1)),(float(c)/(clghost+0.1)),(float(a)/(clcapsules+0.1))
+    value = d+x+y-z+w+score
+    return value
+
+        # find the manhattanDistance of the new pacman position and the available food
+        dist1 = []
+        for i, itemI in enumerate(food):
+            for j, itemJ in enumerate(itemI):
+                if itemJ:
+                    dist1.append(manhattanDistance(newPos, (i, j)))
+
+        # get the closest food
+        dist1.sort()
+        if dist1:
+            minitem = dist1[0]
+        else:
+            minitem = 0
