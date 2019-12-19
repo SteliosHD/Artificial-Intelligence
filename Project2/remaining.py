@@ -234,3 +234,23 @@ test_cases/q3/2-2b-vary-depth
             minitem = dist1[0]
         else:
             minitem = 0
+
+        # # get some values
+        # food =currentGameState.getFood()
+        # ghostPos = currentGameState.getGhostPosition(1)
+        # newGhostPos = successorGameState.getGhostPosition(1)
+        # newScore = successorGameState.getScore()
+        #
+        #
+        # closefood = closestFood(newPos,food)
+        # # add some weights to the values that generates the score value if foodWeigh > ghostWeigh
+        # # pacman risks more and rushes for food else pacman tries first to stay alive
+        # # if these values are relative close pacman is balanced
+        # foodWeigh = 100
+        # ghostWeigh = 120
+        #
+        # # calculate the val where states closer to food are important but also avoid ghosts
+        # val = (foodWeigh/(minitem + 0.1))-(ghostWeigh/(manhattanDistance(newPos, ghostPos) + 0.1))
+        #
+        # return val
+
