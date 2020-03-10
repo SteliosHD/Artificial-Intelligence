@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5cb22b98-b6ce-43ef-8cd3-61fb41b5c041" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Project3/kakuro.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project3/kakuro2.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1Tvy7zL17l2A7EIVNoup02k5tGg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Information Technology/Programming Projects/Django/django_project" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="Artificial-Intelligence" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="Artificial-Intelligence" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.kakuro2">
+    <configuration name="autograder" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Artificial-Intelligence" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Project2/multiagent" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Project2/multiagent/autograder.py" />
+      <option name="PARAMETERS" value="-q q1" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="kakuro" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Artificial-Intelligence" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Project3" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Project3/kakuro.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="kakuro2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Artificial-Intelligence" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Project3" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Project3/kakuro2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tictactoe" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Artificial-Intelligence" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Project2" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Project2/tictactoe.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tictactoeX" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Artificial-Intelligence" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/anaconda3/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Project3" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.autograder" />
+      <item itemvalue="Python.kakuro2" />
+      <item itemvalue="Python.kakuro" />
+      <item itemvalue="Python.tictactoeX" />
+      <item itemvalue="Python.tictactoe" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.kakuro2" />
+        <item itemvalue="Python.kakuro" />
+        <item itemvalue="Python.tictactoeX" />
+        <item itemvalue="Python.tictactoe" />
+        <item itemvalue="Python.autograder" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5cb22b98-b6ce-43ef-8cd3-61fb41b5c041" name="Default Changelist" comment="" />
+      <created>1574354700550</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1574354700550</updated>
+      <workItem from="1574354709706" duration="1764000" />
+      <workItem from="1581537143592" duration="8000" />
+      <workItem from="1581538648262" duration="12000" />
+      <workItem from="1581539331963" duration="41000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2251" y="182" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576800356338">
+      <screen x="1920" y="0" width="1680" height="1050" />
+    </state>
+    <state x="2251" y="182" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576800356338" />
+    <state x="2715" y="280" width="515" height="488" key="#xdebugger.XInspectDialog" timestamp="1576808468607">
+      <screen x="1920" y="0" width="1680" height="1050" />
+    </state>
+    <state x="2715" y="280" width="515" height="488" key="#xdebugger.XInspectDialog/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576808468607" />
+    <state x="2678" y="68" width="580" height="581" key="#xdebugger.evaluate" timestamp="1576808912622">
+      <screen x="1920" y="0" width="1680" height="1050" />
+    </state>
+    <state x="2678" y="68" width="580" height="581" key="#xdebugger.evaluate/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576808912622" />
+    <state x="2670" y="290" width="424" height="484" key="FileChooserDialogImpl" timestamp="1581539368687">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2670" y="290" key="FileChooserDialogImpl/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1581539368687" />
+    <state x="2576" y="282" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576800353346" />
+    <state width="1592" height="216" key="GridCell.Tab.0.bottom" timestamp="1576845808376">
+      <screen x="1920" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1592" height="216" key="GridCell.Tab.0.bottom/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808376" />
+    <state width="1592" height="216" key="GridCell.Tab.0.center" timestamp="1576845808375">
+      <screen x="1920" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1592" height="216" key="GridCell.Tab.0.center/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808375" />
+    <state width="1592" height="216" key="GridCell.Tab.0.left" timestamp="1576845808375">
+      <screen x="1920" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1592" height="216" key="GridCell.Tab.0.left/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808375" />
+    <state width="1592" height="216" key="GridCell.Tab.0.right" timestamp="1576845808375">
+      <screen x="1920" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1592" height="216" key="GridCell.Tab.0.right/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808375" />
+    <state width="1592" height="216" key="GridCell.Tab.1.bottom" timestamp="1576845808376">
+      <screen x="1920" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1592" height="216" key="GridCell.Tab.1.bottom/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808376" />
+    <state width="1592" height="216" key="GridCell.Tab.1.center" timestamp="1576845808376">
+      <screen x="1920" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1592" height="216" key="GridCell.Tab.1.center/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808376" />
+    <state width="1592" height="216" key="GridCell.Tab.1.left" timestamp="1576845808376">
+      <screen x="1920" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1592" height="216" key="GridCell.Tab.1.left/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808376" />
+    <state width="1592" height="216" key="GridCell.Tab.1.right" timestamp="1576845808376">
+      <screen x="1920" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1592" height="216" key="GridCell.Tab.1.right/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808376" />
+    <state x="2312" y="159" key="SettingsEditor" timestamp="1576799807515">
+      <screen x="1920" y="0" width="1680" height="1050" />
+    </state>
+    <state x="2312" y="159" key="SettingsEditor/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576799807515" />
+    <state x="2584" y="362" key="com.intellij.ide.util.TipDialog" timestamp="1581539332999">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2584" y="362" key="com.intellij.ide.util.TipDialog/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1581539332999" />
+    <state x="2501" y="352" key="com.intellij.ide.util.TipDialog/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576799774912" />
+    <state x="708" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053/1920.0.1680.1050@67.27.1853.1053" timestamp="1576799217735" />
+    <state x="635" y="27" width="707" height="697" maximized="true" key="dock-window-1" timestamp="1581539333602">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="635" y="27" width="707" height="697" maximized="true" key="dock-window-1/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576806134766" />
+    <state x="2457" y="239" key="run.anything.popup" timestamp="1576804928011">
+      <screen x="1920" y="0" width="1680" height="1050" />
+    </state>
+    <state x="2457" y="239" key="run.anything.popup/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576804928011" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Project3/kakuro.py</url>
+          <line>12</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Project3/kakuro2.py</url>
+          <line>469</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="csp.curr_domains[Xj]" language="Python" />
+        <watch expression="Sj_u" language="Python" />
+        <watch expression="csp" language="Python" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
