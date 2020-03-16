@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5cb22b98-b6ce-43ef-8cd3-61fb41b5c041" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Project3/kakuro.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project3/kakuro2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project3/reinforcement/valueIterationAgents.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project3/reinforcement/valueIterationAgents.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,8 +51,14 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Information Technology/Programming Projects/Django/django_project" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Project3/reinforcement/gridworld.py" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -62,8 +68,8 @@
       </console-settings>
     </option>
   </component>
-  <component name="RunManager" selected="Python.kakuro2">
-    <configuration name="autograder" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.gridworld">
+    <configuration name="gridworld" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Artificial-Intelligence" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -71,13 +77,13 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Project2/multiagent" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Project3/reinforcement" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Project2/multiagent/autograder.py" />
-      <option name="PARAMETERS" value="-q q1" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Project3/reinforcement/gridworld.py" />
+      <option name="PARAMETERS" value="python gridworld.py -a value -i 5" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -107,7 +113,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="kakuro2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="testingshit" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Artificial-Intelligence" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -115,12 +121,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Project3" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Project3/reinforcement" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Project3/kakuro2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Project3/reinforcement/testingshit.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -174,19 +180,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.autograder" />
-      <item itemvalue="Python.kakuro2" />
+      <item itemvalue="Python.gridworld" />
       <item itemvalue="Python.kakuro" />
+      <item itemvalue="Python.testingshit" />
       <item itemvalue="Python.tictactoeX" />
       <item itemvalue="Python.tictactoe" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.kakuro2" />
+        <item itemvalue="Python.gridworld" />
+        <item itemvalue="Python.testingshit" />
         <item itemvalue="Python.kakuro" />
         <item itemvalue="Python.tictactoeX" />
         <item itemvalue="Python.tictactoe" />
-        <item itemvalue="Python.autograder" />
       </list>
     </recent_temporary>
   </component>
@@ -216,6 +222,19 @@
       <workItem from="1581537143592" duration="8000" />
       <workItem from="1581538648262" duration="12000" />
       <workItem from="1581539331963" duration="41000" />
+      <workItem from="1583852994794" duration="2668000" />
+      <workItem from="1583884322646" duration="6129000" />
+      <workItem from="1583945396922" duration="1830000" />
+      <workItem from="1583976915001" duration="7257000" />
+      <workItem from="1584019017890" duration="1995000" />
+      <workItem from="1584022798873" duration="1030000" />
+      <workItem from="1584026702094" duration="87000" />
+      <workItem from="1584026815783" duration="105000" />
+      <workItem from="1584026957428" duration="4279000" />
+      <workItem from="1584114451760" duration="3242000" />
+      <workItem from="1584123632851" duration="6124000" />
+      <workItem from="1584186766409" duration="2927000" />
+      <workItem from="1584310491235" duration="22000" />
     </task>
     <servers />
   </component>
@@ -236,63 +255,79 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="2251" y="182" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576800356338">
-      <screen x="1920" y="0" width="1680" height="1050" />
+    <state x="2548" y="133" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583983893800">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state x="2548" y="133" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1583983893800" />
     <state x="2251" y="182" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576800356338" />
-    <state x="2715" y="280" width="515" height="488" key="#xdebugger.XInspectDialog" timestamp="1576808468607">
-      <screen x="1920" y="0" width="1680" height="1050" />
+    <state x="2665" y="180" width="486" height="744" key="#kakuro2" timestamp="1583887730355">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state x="2665" y="180" width="486" height="744" key="#kakuro2/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1583887730355" />
+    <state x="2829" y="288" width="515" height="488" key="#xdebugger.XInspectDialog" timestamp="1583977856791">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2829" y="288" key="#xdebugger.XInspectDialog/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1583977856791" />
     <state x="2715" y="280" width="515" height="488" key="#xdebugger.XInspectDialog/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576808468607" />
-    <state x="2678" y="68" width="580" height="581" key="#xdebugger.evaluate" timestamp="1576808912622">
-      <screen x="1920" y="0" width="1680" height="1050" />
+    <state x="2911" y="418" width="642" height="624" key="#xdebugger.evaluate" timestamp="1584125856055">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state x="2911" y="418" width="642" height="624" key="#xdebugger.evaluate/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1584125856055" />
     <state x="2678" y="68" width="580" height="581" key="#xdebugger.evaluate/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576808912622" />
-    <state x="2670" y="290" width="424" height="484" key="FileChooserDialogImpl" timestamp="1581539368687">
+    <state x="2670" y="290" width="424" height="484" key="FileChooserDialogImpl" timestamp="1583885727054">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2670" y="290" key="FileChooserDialogImpl/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1581539368687" />
+    <state x="2670" y="290" width="424" height="484" key="FileChooserDialogImpl/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1583885727054" />
     <state x="2576" y="282" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576800353346" />
-    <state width="1592" height="216" key="GridCell.Tab.0.bottom" timestamp="1576845808376">
-      <screen x="1920" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1592" height="216" key="GridCell.Tab.0.bottom/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808376" />
-    <state width="1592" height="216" key="GridCell.Tab.0.center" timestamp="1576845808375">
-      <screen x="1920" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1592" height="216" key="GridCell.Tab.0.center/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808375" />
-    <state width="1592" height="216" key="GridCell.Tab.0.left" timestamp="1576845808375">
-      <screen x="1920" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1592" height="216" key="GridCell.Tab.0.left/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808375" />
-    <state width="1592" height="216" key="GridCell.Tab.0.right" timestamp="1576845808375">
-      <screen x="1920" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1592" height="216" key="GridCell.Tab.0.right/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808375" />
-    <state width="1592" height="216" key="GridCell.Tab.1.bottom" timestamp="1576845808376">
-      <screen x="1920" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1592" height="216" key="GridCell.Tab.1.bottom/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808376" />
-    <state width="1592" height="216" key="GridCell.Tab.1.center" timestamp="1576845808376">
-      <screen x="1920" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1592" height="216" key="GridCell.Tab.1.center/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808376" />
-    <state width="1592" height="216" key="GridCell.Tab.1.left" timestamp="1576845808376">
-      <screen x="1920" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1592" height="216" key="GridCell.Tab.1.left/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808376" />
-    <state width="1592" height="216" key="GridCell.Tab.1.right" timestamp="1576845808376">
-      <screen x="1920" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1592" height="216" key="GridCell.Tab.1.right/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808376" />
-    <state x="2312" y="159" key="SettingsEditor" timestamp="1576799807515">
-      <screen x="1920" y="0" width="1680" height="1050" />
-    </state>
-    <state x="2312" y="159" key="SettingsEditor/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576799807515" />
-    <state x="2584" y="362" key="com.intellij.ide.util.TipDialog" timestamp="1581539332999">
+    <state width="1811" height="288" key="GridCell.Tab.0.bottom" timestamp="1584130179603">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2584" y="362" key="com.intellij.ide.util.TipDialog/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1581539332999" />
+    <state width="1811" height="288" key="GridCell.Tab.0.bottom/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1584130179603" />
+    <state width="1592" height="216" key="GridCell.Tab.0.bottom/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808376" />
+    <state width="1811" height="288" key="GridCell.Tab.0.center" timestamp="1584130179603">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1811" height="288" key="GridCell.Tab.0.center/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1584130179603" />
+    <state width="1592" height="216" key="GridCell.Tab.0.center/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808375" />
+    <state width="1811" height="288" key="GridCell.Tab.0.left" timestamp="1584130179602">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1811" height="288" key="GridCell.Tab.0.left/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1584130179602" />
+    <state width="1592" height="216" key="GridCell.Tab.0.left/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808375" />
+    <state width="1811" height="288" key="GridCell.Tab.0.right" timestamp="1584130179603">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1811" height="288" key="GridCell.Tab.0.right/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1584130179603" />
+    <state width="1592" height="216" key="GridCell.Tab.0.right/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808375" />
+    <state width="1811" height="231" key="GridCell.Tab.1.bottom" timestamp="1584130177208">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1811" height="231" key="GridCell.Tab.1.bottom/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1584130177208" />
+    <state width="1592" height="216" key="GridCell.Tab.1.bottom/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808376" />
+    <state width="1811" height="231" key="GridCell.Tab.1.center" timestamp="1584130177208">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1811" height="231" key="GridCell.Tab.1.center/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1584130177208" />
+    <state width="1592" height="216" key="GridCell.Tab.1.center/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808376" />
+    <state width="1811" height="231" key="GridCell.Tab.1.left" timestamp="1584130177208">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1811" height="231" key="GridCell.Tab.1.left/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1584130177208" />
+    <state width="1592" height="216" key="GridCell.Tab.1.left/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808376" />
+    <state width="1811" height="231" key="GridCell.Tab.1.right" timestamp="1584130177208">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1811" height="231" key="GridCell.Tab.1.right/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1584130177208" />
+    <state width="1592" height="216" key="GridCell.Tab.1.right/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576845808376" />
+    <state x="2368" y="164" key="SettingsEditor" timestamp="1584027047247">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2368" y="164" key="SettingsEditor/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1584027047247" />
+    <state x="2312" y="159" key="SettingsEditor/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576799807515" />
+    <state x="2584" y="362" key="com.intellij.ide.util.TipDialog" timestamp="1584310510147">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2584" y="362" key="com.intellij.ide.util.TipDialog/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1584310510147" />
     <state x="2501" y="352" key="com.intellij.ide.util.TipDialog/67.27.1853.1053/1920.0.1680.1050@1920.0.1680.1050" timestamp="1576799774912" />
     <state x="708" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053/1920.0.1680.1050@67.27.1853.1053" timestamp="1576799217735" />
     <state x="635" y="27" width="707" height="697" maximized="true" key="dock-window-1" timestamp="1581539333602">
@@ -306,18 +341,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Project3/kakuro.py</url>
-          <line>12</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Project3/kakuro2.py</url>
-          <line>469</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -326,5 +356,10 @@
         <watch expression="csp" language="Python" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Artificial_Intelligence$testingshit.coverage" NAME="testingshit Coverage Results" MODIFIED="1583889855050" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Project3/reinforcement" />
+    <SUITE FILE_PATH="coverage/Artificial_Intelligence$gridworld.coverage" NAME="gridworld Coverage Results" MODIFIED="1584126307638" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Project3/reinforcement" />
+    <SUITE FILE_PATH="coverage/Artificial_Intelligence$kakuro2.coverage" NAME="gridworld Coverage Results" MODIFIED="1583890877509" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Project3/reinforcement" />
   </component>
 </project>

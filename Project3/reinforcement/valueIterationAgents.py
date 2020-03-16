@@ -4,7 +4,7 @@
 # educational purposes provided that (1) you do not distribute or publish
 # solutions, (2) you retain this notice, and (3) you provide clear
 # attribution to UC Berkeley, including a link to http://ai.berkeley.edu.
-# 
+#
 # Attribution Information: The Pacman AI projects were developed at UC Berkeley.
 # The core projects and autograders were primarily created by John DeNero
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
@@ -18,7 +18,7 @@
 # educational purposes provided that (1) you do not distribute or publish
 # solutions, (2) you retain this notice, and (3) you provide clear
 # attribution to UC Berkeley, including a link to http://ai.berkeley.edu.
-# 
+#
 # Attribution Information: The Pacman AI projects were developed at UC Berkeley.
 # The core projects and autograders were primarily created by John DeNero
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
@@ -26,8 +26,7 @@
 # Pieter Abbeel (pabbeel@cs.berkeley.edu).
 
 
-import mdp, util
-
+import mdp,util,copy
 from learningAgents import ValueEstimationAgent
 import collections
 
@@ -58,10 +57,62 @@ class ValueIterationAgent(ValueEstimationAgent):
         self.iterations = iterations
         self.values = util.Counter() # A Counter is a dict with default 0
         self.runValueIteration()
+        self.legalActions ={}
+
 
     def runValueIteration(self):
         # Write value iteration code here
         "*** YOUR CODE HERE ***"
+        self.epsilon  = 0.05
+        self.actions = {}
+        self.valuesKminusOne = util.Counter()
+        for state in self.mdp.getStates():
+            self.actions.update({state: None})
+            self.values.update({state: 0})
+        # import pdb; pdb.set_trace()
+        for i in range(self.iterations):
+            for state in self.mdp.getStates():
+                max, maxAction = self.maxValue(state)
+                nextState = self.nxt(state, maxAction)
+                self.values.update({state:self.mdp.getReward(state, maxAction, nextState)+self.discount*max})
+                self.actions.update({state:maxAction})
+            self.valuesKminusOne = copy.deepcopy(self.values)
+        # import pdb; pdb.set_trace()
+
+
+    def maxValue(self, state):
+        if state == 'TERMINAL_STATE':
+            return 0,None
+        max = None
+        maxAction = None
+        for action in self.mdp.getPossibleActions(state):
+            sumAction = sum([self.valuesKminusOne[x[0]]*x[1] for x in self.mdp.getTransitionStatesAndProbs(state, action)])
+            if  max == None:
+                max = sumAction
+                maxAction = action
+            elif sumAction > max:
+                max = sumAction
+                maxAction = action
+
+        return max, maxAction
+
+    @staticmethod
+    def nxt(state, action):
+        if state == 'TERMINAL_STATE':
+            return 'exit'
+        if action == 'north':
+            return(state[0],state[1]+1)
+        elif action == 'east':
+            return(state[0]+1,state[1])
+        elif action == 'south':
+            return(state[0],state[1]-1)
+        else :
+            return(state[0]-1,state[1])
+
+
+
+
+
 
 
     def getValue(self, state):
@@ -77,7 +128,36 @@ class ValueIterationAgent(ValueEstimationAgent):
           value function stored in self.values.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        #
+        if  'exit' in self.mdp.getPossibleActions(state):
+            # import pdb; pdb.set_trace()
+            return self.mdp.getReward(state,None,'exit')
+        if action == 'north':
+            newState = (state[0], state[1] + 1)
+        elif action == 'east':
+            newState = (state[0] + 1, state[1])
+        elif action == 'south':
+            newState = (state[0], state[1] - 1)
+        elif action == 'west':
+            newState = (state[0] - 1, state[1])
+        else:
+            newState = 'TERMINAL_STATE'
+        possibleStates = [x for x in self.mdp.getTransitionStatesAndProbs(state, action)]
+        # import pdb; pdb.set_trace()
+        prob = 0
+        if not possibleStates:
+            prob=1
+        for states in possibleStates:
+            if newState == states[0]:
+                prob = states[1]
+                break
+        # import pdb; pdb.set_trace()
+        if prob==0:
+            newState = state
+            prob = 1
+        return self.discount*prob*self.values[newState]
+        # util.raiseNotDefined()
+
 
     def computeActionFromValues(self, state):
         """
@@ -89,7 +169,11 @@ class ValueIterationAgent(ValueEstimationAgent):
           terminal state, you should return None.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        # util.raiseNotDefined()
+        if state=='TERMINAL_STATE':
+            return None
+        else:
+            return self.actions[state]
 
     def getPolicy(self, state):
         return self.computeActionFromValues(state)
@@ -150,4 +234,3 @@ class PrioritizedSweepingValueIterationAgent(AsynchronousValueIterationAgent):
 
     def runValueIteration(self):
         "*** YOUR CODE HERE ***"
-
