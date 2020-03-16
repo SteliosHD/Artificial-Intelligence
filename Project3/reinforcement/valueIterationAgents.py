@@ -69,7 +69,6 @@ class ValueIterationAgent(ValueEstimationAgent):
         for state in self.mdp.getStates():
             self.actions.update({state: None})
             self.values.update({state: 0})
-        # import pdb; pdb.set_trace()
         for i in range(self.iterations):
             for state in self.mdp.getStates():
                 max, maxAction = self.maxValue(state)
@@ -77,7 +76,6 @@ class ValueIterationAgent(ValueEstimationAgent):
                 self.values.update({state:self.mdp.getReward(state, maxAction, nextState)+self.discount*max})
                 self.actions.update({state:maxAction})
             self.valuesKminusOne = copy.deepcopy(self.values)
-        # import pdb; pdb.set_trace()
 
 
     def maxValue(self, state):
@@ -139,7 +137,7 @@ class ValueIterationAgent(ValueEstimationAgent):
                 qvalue += self.values[nextstate[0]]*nextstate[1]
 
         return qvalue*self.discount
-        # util.raiseNotDefined()
+
 
 
     def computeActionFromValues(self, state):
