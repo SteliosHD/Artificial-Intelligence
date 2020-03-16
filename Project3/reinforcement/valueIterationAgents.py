@@ -156,6 +156,7 @@ class ValueIterationAgent(ValueEstimationAgent):
             newState = state
             prob = 1
         return self.discount*prob*self.values[newState]
+        print(new)
         # util.raiseNotDefined()
 
 
