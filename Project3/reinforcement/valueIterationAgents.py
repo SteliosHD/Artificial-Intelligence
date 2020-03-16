@@ -129,34 +129,16 @@ class ValueIterationAgent(ValueEstimationAgent):
         """
         "*** YOUR CODE HERE ***"
         #
-        if  'exit' in self.mdp.getPossibleActions(state):
-            # import pdb; pdb.set_trace()
-            return self.mdp.getReward(state,None,'exit')
-        if action == 'north':
-            newState = (state[0], state[1] + 1)
-        elif action == 'east':
-            newState = (state[0] + 1, state[1])
-        elif action == 'south':
-            newState = (state[0], state[1] - 1)
-        elif action == 'west':
-            newState = (state[0] - 1, state[1])
-        else:
-            newState = 'TERMINAL_STATE'
+
         possibleStates = [x for x in self.mdp.getTransitionStatesAndProbs(state, action)]
-        # import pdb; pdb.set_trace()
-        prob = 0
-        if not possibleStates:
-            prob=1
-        for states in possibleStates:
-            if newState == states[0]:
-                prob = states[1]
-                break
-        # import pdb; pdb.set_trace()
-        if prob==0:
-            newState = state
-            prob = 1
-        return self.discount*prob*self.values[newState]
-        print(new)
+        if action == 'exit' or self.iterations==0:
+            return self.mdp.getReward(state,None,None)
+        else:
+            qvalue = 0
+            for nextstate in possibleStates:
+                qvalue += self.values[nextstate[0]]*nextstate[1]
+
+        return qvalue*self.discount
         # util.raiseNotDefined()
 
 
